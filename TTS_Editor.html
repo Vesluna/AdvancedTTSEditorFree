@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced TTS Editor</title>
+    <link rel="stylesheet" href="TTS_EditorStyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Text-to-Speech Editor</h1>
+        <div class="controls">
+            <textarea id="textInput" placeholder="Type your text here..." aria-label="Text input for speech"></textarea>
+            <div class="settings">
+                <div class="setting-group">
+                    <label for="languageSelect">Language:</label>
+                    <select id="languageSelect" aria-label="Select language"></select>
+                </div>
+                <div class="setting-group">
+                    <label for="voiceSelect">Voice:</label>
+                    <select id="voiceSelect" aria-label="Select voice"></select>
+                </div>
+                <div class="setting-group">
+                    <label for="genderSelect">Gender:</label>
+                    <select id="genderSelect" aria-label="Filter by gender">
+                        <option value="">All</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label for="typeSelect">Voice Type:</label>
+                    <select id="typeSelect" aria-label="Filter by voice type">
+                        <option value="">All</option>
+                        <option value="standard">Standard</option>
+                        <option value="enhanced">Enhanced</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label for="rate">Rate: <span id="rateValue">1</span></label>
+                    <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1" aria-label="Speech rate">
+                </div>
+                <div class="setting-group">
+                    <label for="pitch">Pitch: <span id="pitchValue">1</span></label>
+                    <input type="range" id="pitch" min="0" max="2" step="0.1" value="1" aria-label="Speech pitch">
+                </div>
+                <div class="setting-group">
+                    <label for="volume">Volume: <span id="volumeValue">1</span></label>
+                    <input type="range" id="volume" min="0" max="1" step="0.1" value="1" aria-label="Speech volume">
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="testVoiceBtn" aria-label="Test selected voice">Test Voice</button>
+                <button id="previewBtn" aria-label="Preview speech">Preview</button>
+                <button id="speakBtn" aria-label="Speak text">Speak</button>
+                <button id="downloadBtn" disabled aria-label="Download TTS config">Download</button>
+                <button id="savePromptBtn" aria-label="Save prompt">Save Prompt</button>
+                <button id="loadPromptBtn" aria-label="Toggle saved prompts">Prompts</button>
+            </div>
+        </div>
+        <div class="prompts">
+            <h2>Saved Prompts</h2>
+            <ul id="promptList" class="item-list"></ul>
+        </div>
+        <div class="history">
+            <h2>Recent History</h2>
+            <ul id="historyList" class="item-list"></ul>
+        </div>
+        <div class="instructions">
+            <h2>How to Use and Convert to MP3</h2>
+            <p>This editor uses your browser's built-in voices (e.g., Microsoft, Google, or Apple voices). To expand voice options, install additional voices via your operating system settings (e.g., Windows Speech Settings, macOS VoiceOver). Convert your TTS config to MP3 with these steps:</p>
+            <ol>
+                <li><strong>Download Config:</strong> Click "Download" after previewing or speaking your text.</li>
+                <li><strong>Choose a Tool:</strong> Use a tool like <a href="http://espeak.sourceforge.net/" target="_blank">eSpeak</a> or an online service like <a href="https://www.naturalreaders.com/" target="_blank">NaturalReader</a>.</li>
+                <li><strong>eSpeak Command:</strong> Install eSpeak and run (replace <code>config.txt</code>):
+                    <pre>espeak -f config.txt -w output.mp3</pre>
+                </li>
+                <li><strong>Online Tools:</strong> Paste config text into an online TTS service, adjust settings, and download MP3.</li>
+                <li><strong>Note:</strong> Voice availability depends on your device. Check your system settings to add more voices.</li>
+                <li><strong>Other Options:</strong>
+                    <ul>
+                        <li><strong>Balabolka (Windows):</strong> Use <a href="http://www.cross-plus-a.com/balabolka.htm" target="_blank">Balabolka</a>. Paste config text, adjust settings, and export as MP3.</li>
+                        <li><strong>ttsMP3.com:</strong> Visit <a href="https://ttsmp3.com/" target="_blank">ttsMP3.com</a>. Paste text, select voice, and download MP3.</li>
+                        <li><strong>IBM Watson TTS:</strong> Try <a href="https://www.ibm.com/cloud/watson-text-to-speech" target="_blank">IBM Watson</a>. Sign up, input text, and download audio.</li>
+                        <li><strong>Google Cloud TTS:</strong> Use <a href="https://cloud.google.com/text-to-speech" target="_blank">Google Cloud TTS</a>. Create an account, input text, and generate MP3.</li>
+                        <li><strong>Voicemod TTS:</strong> Explore <a href="https://www.voicemod.net/tts/" target="_blank">Voicemod TTS</a>. Paste text, choose a voice, and download.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="notification" id="notification"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="TTS_EditorScripts.js"></script>
+</body>
+</html>
